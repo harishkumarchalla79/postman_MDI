@@ -1,0 +1,451 @@
+{
+	"info": {
+		"_postman_id": "266d56dd-5988-4b76-bec3-a72ee8089cd5",
+		"name": "WKC-MDI - newman",
+		"description": "Api Documentation:\nhttps://test.cloud.ibm.com/apidocs/watson-data-api#introduction",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.collectionVariables.set(\"BearerToken\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"admin\",\"password\":\"password\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/icp4d-api/v1/authorize",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"icp4d-api",
+						"v1",
+						"authorize"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create MDI2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{BearerToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"description\": \"{{mdiDescription}}\",\n  \"name\": \"{{mdiName}}\",\n  \"connection_id\": \"{{connectionId}}\",\n  \"target_project_id\": \"{{projectId}}\",\n  \"target_catalog_id\": null,\n  \"scope\": {\"paths\": [\"\"]}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/v2/metadata_imports?project_id={{projectId}}",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"v2",
+						"metadata_imports"
+					],
+					"query": [
+						{
+							"key": "project_id",
+							"value": "{{projectId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Datasource Types",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{BearerToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"description\": \"{{mdiDescription}}\",\n  \"name\": \"{{mdiName}}\",\n  \"connection_id\": \"{{connectionId}}\",\n  \"target_project_id\": \"{{projectId}}\",\n  \"target_catalog_id\": null,\n  \"scope\": {\"paths\": [\"\"]}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/v2/datasource_types",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"v2",
+						"datasource_types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Datasource Types MDI",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{BearerToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"description\": \"Import of a db2 table\",\n  \"name\": \"MDI2_JAN888\",\n  \"connection_id\": \"e71f1ce1-8ebf-4b7a-9b0a-130c7af90861\",\n  \"target_project_id\": \"16a0dddd-3861-4da5-be6b-147c267cc026\",\n  \"target_catalog_id\": null,\n  \"scope\": {\"paths\": [\"/DB2INST1\"]}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/v2/metadata_imports/connections",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"v2",
+						"metadata_imports",
+						"connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get metdata_imports connections",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{BearerToken}}"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/v2/metadata_imports/b00ac47c-7652-47a1-a343-a262352455e5?project_id={{projectId}}",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"v2",
+						"metadata_imports",
+						"b00ac47c-7652-47a1-a343-a262352455e5"
+					],
+					"query": [
+						{
+							"key": "project_id",
+							"value": "{{projectId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit MDI Asset",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{BearerToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"job\": {\n        \"asset_ref\": \"b00ac47c-7652-47a1-a343-a262352455e5\",\n        \"name\": \"mdiamazons3job322_new4\",\n        \"description\": \" \",\n        \"configuration\":{}\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/v2/jobs?project_id={{projectId}}",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"v2",
+						"jobs"
+					],
+					"query": [
+						{
+							"key": "project_id",
+							"value": "{{projectId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch MDI Job",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{BearerToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"job_id\":\"6e347cac-208c-4541-a1fb-d57565a6964e\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/v2/metadata_imports/b00ac47c-7652-47a1-a343-a262352455e5?project_id={{projectId}}",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"v2",
+						"metadata_imports",
+						"b00ac47c-7652-47a1-a343-a262352455e5"
+					],
+					"query": [
+						{
+							"key": "project_id",
+							"value": "{{projectId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RUN MDI Asset",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{BearerToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"job_run\":{}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/v2/jobs/6e347cac-208c-4541-a1fb-d57565a6964e/runs?project_id={{projectId}}&job_id=6e347cac-208c-4541-a1fb-d57565a6964e",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"v2",
+						"jobs",
+						"6e347cac-208c-4541-a1fb-d57565a6964e",
+						"runs"
+					],
+					"query": [
+						{
+							"key": "project_id",
+							"value": "{{projectId}}"
+						},
+						{
+							"key": "job_id",
+							"value": "6e347cac-208c-4541-a1fb-d57565a6964e"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "apikey",
+			"value": "fus7D1RlSsvh_Xrz3gNDc3pimZJS_rGHy5hh28QkC1y0"
+		},
+		{
+			"key": "BearerToken",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwicGVybWlzc2lvbnMiOlsiYWRtaW5pc3RyYXRvciIsImNhbl9wcm92aXNpb24iLCJtYW5hZ2VfY2F0YWxvZyIsImF1dGhvcl9nb3Zlcm5hbmNlX2FydGlmYWN0cyIsIm1hbmFnZV9nb3Zlcm5hbmNlX3dvcmtmbG93Iiwidmlld19nb3Zlcm5hbmNlX2FydGlmYWN0cyIsIm1hbmFnZV9jYXRlZ29yaWVzIiwibWFuYWdlX3F1YWxpdHkiLCJtYW5hZ2VfaW5mb3JtYXRpb25fYXNzZXRzIiwibWFuYWdlX2Rpc2NvdmVyeSIsIm1hbmFnZV9tZXRhZGF0YV9pbXBvcnQiLCJhY2Nlc3NfY2F0YWxvZyIsInZpZXdfcXVhbGl0eSIsImFjY2Vzc19pbmZvcm1hdGlvbl9hc3NldHMiXSwiZ3JvdXBzIjpbMTAwMDBdLCJzdWIiOiJhZG1pbiIsImlzcyI6IktOT1hTU08iLCJhdWQiOiJEU1giLCJ1aWQiOiIxMDAwMzMwOTk5IiwiYXV0aGVudGljYXRvciI6ImRlZmF1bHQiLCJpYXQiOjE2MTc2NDUxMjgsImV4cCI6MTYxNzY4ODI5Mn0.gByNGi0JvaXvWHaJ4Yy9dOmsuYD1ubi4JVWUhuQX1hJou90Bwt4mK6G9__ZbfwZEWMCyvmuGCuAJjs44xPeHw7oYcYIr6OzQqNuhp5Oql_YejHB4IndAV2nawwN552-59H13YsnhSNfaXreZXskJeb2sJikCyEb0xquMYauAkli2O05gBdIV_FEgeY16AuUc2p2fH-HgPzCh-_x13M-rJ4X1IOIcztNJQuiUX386DO2S7EpogE2WhXxJgN81N8fIoJMRDXXhtjiadQPO5IPrFIYUTE4kRSrqwL2DnqhjyfSJ_1QADV46yFcFRIllGnyffZ6pmuEhkQFGda4jHhnbGQ"
+		},
+		{
+			"key": "endpoint",
+			"value": "https://wkc-cpd-wkc.apps.cpd40x-bkp-staging.cp.fyre.ibm.com"
+		},
+		{
+			"key": "AccountID",
+			"value": "8fd4a210cf3145f8b8b05af3f9aa376d"
+		},
+		{
+			"key": "iam_endpoint",
+			"value": "https://iam.test.cloud.ibm.com"
+		},
+		{
+			"key": "IAM_ID",
+			"value": "IBMid-550002J5V0"
+		},
+		{
+			"key": "projectId",
+			"value": "22f3fbbd-8f95-4dad-9ced-bd28be4dcff8"
+		},
+		{
+			"key": "connectionId",
+			"value": "71dc6c8a-6fcf-4125-ad05-c4f7018edd33"
+		},
+		{
+			"key": "jobId",
+			"value": ""
+		},
+		{
+			"key": "metadataImportId",
+			"value": ""
+		},
+		{
+			"key": "mdiDescription",
+			"value": "This is Amazon S3 MDI"
+		},
+		{
+			"key": "mdiName",
+			"value": "Amazon S3 MDI-4"
+		}
+	]
+}
